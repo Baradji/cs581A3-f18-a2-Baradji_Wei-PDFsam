@@ -32,7 +32,8 @@ import org.sejda.model.input.PdfFileSource;
 import org.sejda.model.input.PdfMixInput;
 import org.sejda.model.output.ExistingOutputPolicy;
 import org.sejda.model.output.FileTaskOutput;
-import org.sejda.model.parameter.AlternateMixMultipleInputParameters;
+//import org.sejda.model.parameter.AlternateMixMultipleInputParameters;
+import org.pdfsam.task.AlternateMixMultipleInputParameters;
 import org.sejda.model.pdf.PdfVersion;
 
 /**

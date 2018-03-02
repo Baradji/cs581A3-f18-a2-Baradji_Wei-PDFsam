@@ -25,8 +25,8 @@ import org.pdfsam.support.params.SingleOutputTaskParametersBuilder;
 import org.sejda.common.collection.NullSafeSet;
 import org.sejda.model.input.PdfMixInput;
 import org.sejda.model.output.FileTaskOutput;
-import org.sejda.model.parameter.AlternateMixMultipleInputParameters;
-
+//import org.sejda.model.parameter.AlternateMixMultipleInputParameters;
+import org.pdfsam.task.AlternateMixMultipleInputParameters;
 /**
  * Builder for the {@link AlternateMixMultipleInputParameters}
  * 
