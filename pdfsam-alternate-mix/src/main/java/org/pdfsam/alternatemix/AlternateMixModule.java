@@ -95,8 +95,14 @@ public class AlternateMixModule extends BaseTaskExecutionModule {
 
     @Override
     public void onLoadWorkspace(Map<String, String> data) {
-        // backwards comp when alternate mix had 2 inputs
-        if (data.containsKey("firstDocumentMixinput")) {
+    	backwardsComp(data);
+        selectionPane.restoreStateFrom(data);
+        destinationFileField.restoreStateFrom(data);
+        destinationPane.restoreStateFrom(data);
+    }
+    
+    public void backwardsComp(Map<String, String> data){
+    	if (data.containsKey("firstDocumentMixinput")) {
             data.put("input.0", data.get("firstDocumentMixinput"));
             data.put("input.password.0", data.get("firstDocumentMixinputinput.password"));
             data.put("input.step.0", data.get("firstStep"));
@@ -110,9 +116,6 @@ public class AlternateMixModule extends BaseTaskExecutionModule {
                 data.put("input.size", "2");
             }
         }
-        selectionPane.restoreStateFrom(data);
-        destinationFileField.restoreStateFrom(data);
-        destinationPane.restoreStateFrom(data);
     }
 
     private VBox settingPanel() {
