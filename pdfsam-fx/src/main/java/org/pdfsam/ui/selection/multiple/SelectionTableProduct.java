@@ -149,4 +149,4 @@ public class SelectionTableProduct extends TableView<SelectionTableRowData> {
         item.setDisable(true);
         return item;
     }
-}
+} 

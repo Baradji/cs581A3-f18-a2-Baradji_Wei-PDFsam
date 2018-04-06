@@ -1,5 +1,5 @@
 /* 
- * This file is part of the PDF Split And Merge source code
+ * This file is part of the PDF Split And Merge source code 
  * Created on 27/nov/2013
  * Copyright 2017 by Sober Lemur S.a.s. di Vacondio Andrea (info@pdfsam.org).
  *
