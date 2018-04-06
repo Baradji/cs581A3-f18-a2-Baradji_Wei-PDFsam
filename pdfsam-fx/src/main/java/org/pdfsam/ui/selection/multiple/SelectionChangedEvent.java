@@ -79,7 +79,16 @@ final class SelectionChangedEvent {
         if (isClearSelection()) {
             return false;
         }
-        return getTypeObject(type).canMove(this);
+        switch (type) {
+        case BOTTOM:
+            return isSingleSelection() && bottom < totalRows - 1;
+        case DOWN:
+            return bottom < totalRows - 1;
+        case TOP:
+            return isSingleSelection() && top > 0;
+        default:
+            return top > 0;
+        }
     }
 
     public int getTotalRows() {
@@ -115,24 +124,4 @@ final class SelectionChangedEvent {
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
-
-	private Type getTypeObject(MoveType type) {
-		switch (type) {
-		case BOTTOM:
-			return new Bottom();
-		case DOWN:
-			return new Down();
-		case TOP:
-			return new Top();
-		}
-		return null;
-	}
-
-	public int getBottom() {
-		return bottom;
-	}
-
-	public int getTop() {
-		return top;
-	}
 }
