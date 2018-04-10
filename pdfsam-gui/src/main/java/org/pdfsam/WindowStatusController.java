@@ -40,10 +40,10 @@ import javafx.stage.Stage;
  */
 @Auto
 class WindowStatusController {
-    private static final Logger LOG = LoggerFactory.getLogger(WindowStatusController.class);
+    private WindowStatusControllerProduct windowStatusControllerProduct = new WindowStatusControllerProduct();
+	private static final Logger LOG = LoggerFactory.getLogger(WindowStatusController.class);
     public static final String PDFSAM_DISABLE_UI_RESTORE = "org.pdfsam.disable.ui.restore";
 
-    private Stage stage;
     private StageService service;
 
     @Inject
@@ -52,43 +52,19 @@ class WindowStatusController {
     }
 
     public void setStage(Stage stage) {
-        this.stage = stage;
-        initUi();
+        windowStatusControllerProduct.setStage(stage, this);
     }
 
-    private void initUi() {
+    public void initUi() {
         StageStatus latestStatus = service.getLatestStatus();
         if (!Boolean.getBoolean(PDFSAM_DISABLE_UI_RESTORE) && !StageStatus.NULL.equals(latestStatus)
                 && hasAvailableScreen(latestStatus)) {
-            restore(latestStatus);
+            windowStatusControllerProduct.restore(latestStatus);
             LOG.trace("Stage status restored to {}", latestStatus);
         } else {
-            defaultStageStatus();
+            windowStatusControllerProduct.defaultStageStatus();
             LOG.trace("Stage status set to default values");
         }
-    }
-
-    private void defaultStageStatus() {
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
-        stage.setMaximized(true);
-
-    }
-
-    private void restore(StageStatus latestStatus) {
-        stage.setX(latestStatus.getX());
-        stage.setY(latestStatus.getY());
-        stage.setWidth(latestStatus.getWidth());
-        stage.setHeight(latestStatus.getHeight());
-
-        if (isNotMac()) {
-            latestStatus.getMode().restore(stage);
-        }
-    }
-
-    private boolean isNotMac() {
-        return !Optional.of(System.getProperty("os.name")).orElse("").toLowerCase().contains("mac");
     }
 
     private boolean hasAvailableScreen(StageStatus status) {
